@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SplitCapture — Full Page Screenshots for Figma</title>
+  <meta name="description" content="Capture full-page screenshots and split them into sharp, Figma-ready tiles. Rebuild the whole page in Figma with the free companion plugin." />
+  <meta name="robots" content="index, follow" />
+  <style>
+    :root { color-scheme: light dark; --blue:#2f6bff; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", Arial, sans-serif;
+      line-height: 1.7; max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem;
+      color: #1a1a1a; background: #fff;
+    }
+    @media (prefers-color-scheme: dark) {
+      body { color: #e6e6e6; background: #121212; }
+      a { color: #6ab0ff; }
+      .card { background:#1b1b1f !important; border-color:#2a2a30 !important; }
+    }
+    a { color: var(--blue); }
+    h1 { font-size: 1.9rem; margin-bottom: .25rem; }
+    .tagline { font-size: 1.15rem; color: #667; margin: 0 0 1.5rem; }
+    h2 { font-size: 1.2rem; margin-top: 2.5rem; border-top: 1px solid #8884; padding-top: 1.4rem; }
+    ul { padding-left: 1.2rem; }
+    li { margin: .35rem 0; }
+    .links { display:flex; flex-wrap:wrap; gap:.7rem; margin:1.5rem 0 .5rem; }
+    .btn { display:inline-block; padding:.6rem 1.1rem; border-radius:10px; text-decoration:none; font-weight:650;
+      background:var(--blue); color:#fff; }
+    .btn.secondary { background:transparent; color:var(--blue); border:1px solid var(--blue); }
+    .card { border:1px solid #e2e8f0; border-radius:12px; padding:1rem 1.2rem; background:#f8fafc; }
+    .muted { color:#888; font-size:.92rem; }
+    footer { margin-top:3rem; padding-top:1.4rem; border-top:1px solid #8884; color:#888; font-size:.9rem; }
+    [lang="ja"] { }
+  </style>
+</head>
+<body>
+  <h1>SplitCapture</h1>
+  <p class="tagline">Full-page screenshots that stay sharp in Figma.</p>
+
+  <p>SplitCapture is a Chrome extension that captures an entire web page and splits it into
+  Figma-ready image tiles. Figma downscales anything taller than 4096px and it turns blurry —
+  SplitCapture keeps every reference <strong>100% pixel-perfect</strong> by splitting first.</p>
+
+  <div class="links">
+    <a class="btn secondary" href="./privacy.html">Privacy Policy</a>
+    <a class="btn secondary" href="https://www.figma.com/community/plugin/1650761889205206657">Companion Figma plugin</a>
+  </div>
+  <p class="muted">The Chrome Web Store listing link will be added here once the extension is published.</p>
+
+  <h2>Features</h2>
+  <ul>
+    <li>Full-page capture — scrolls and stitches the entire page, including lazy-loaded content</li>
+    <li>Figma-ready tiles — auto-split under the 4096px limit so nothing gets blurred</li>
+    <li>Capture any element — click to grab a single component instead of the whole page</li>
+    <li>Flexible output — PNG, JPEG, ZIP, or copy to clipboard</li>
+    <li>Adjustable split height and overlap (Pro)</li>
+    <li>100% local — your screenshots and page content never leave your browser</li>
+  </ul>
+
+  <h2>Support</h2>
+  <div class="card">
+    <p>Questions, bug reports, or feature requests? We're happy to help.</p>
+    <p>Email: <a href="mailto:akihisa0918@gmail.com">akihisa0918@gmail.com</a></p>
+  </div>
+
+  <hr style="margin:3rem 0; border:none; border-top:1px solid #8884;" />
+
+  <h1 lang="ja" style="font-size:1.5rem;">SplitCapture（日本語）</h1>
+  <p lang="ja">SplitCapture は、Webページ全体をキャプチャし、Figmaで扱いやすいサイズに分割するChrome拡張機能です。
+  Figmaは4096pxを超える長い画像を縮小してぼかしてしまいますが、先に分割することで
+  <strong>100%ピクセル正確</strong>なまま参照画像を保てます。無料のコンパニオンFigmaプラグインで、
+  分割したタイルを1枚の長尺ページに再構築できます。</p>
+  <p lang="ja">お問い合わせ: <a href="mailto:akihisa0918@gmail.com">akihisa0918@gmail.com</a></p>
+
+  <footer>
+    Not affiliated with, endorsed by, or sponsored by Figma. Figma is a trademark of Figma, Inc.<br>
+    Figmaとの提携・推奨・スポンサー関係はありません。FigmaはFigma, Inc.の商標です。
+  </footer>
+</body>
+</html>
