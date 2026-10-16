@@ -1,0 +1,23 @@
+# SplitCapture
+
+> SplitCapture is a Chrome extension that captures full web pages and splits them into tiles of 4096px or less, so they stay sharp in Figma (Figma downscales any image larger than 4096px on a side). The free companion Figma plugin, "SplitCapture: Screenshot Arranger", rebuilds the tiles into one seamless full-length page — in order, with no gaps.
+
+- Free: unlimited full-page captures, unlimited component (element) captures, 3 split captures per day.
+- SplitCapture Pro: USD 5 one-time payment (no subscription), unlimited split captures and custom split height/overlap, 14-day full refund.
+- The Figma plugin is free. Everything runs locally; screenshots are never uploaded.
+- Made by bigaro LLC (合同会社bigaro). Not affiliated with Figma, Inc.
+
+## Guides
+
+- [Why Figma screenshots get blurry and how to keep them sharp](https://splitcapture.big-aro.com/figma-screenshot-guide.html): the 4096px limit, a 3-step fix, how the splitting works, comparison with other methods, pricing and FAQ
+- [Figmaでスクショがぼやける原因と鮮明なまま貼る方法（日本語）](https://splitcapture.big-aro.com/ja/figma-screenshot-guide.html): Japanese version of the guide
+
+## Get it
+
+- [SplitCapture on the Chrome Web Store](https://chromewebstore.google.com/detail/jboihccnamhoaiibfokihgpkjmbkndbo)
+- [SplitCapture: Screenshot Arranger on Figma Community](https://www.figma.com/community/plugin/1650761889205206657/splitcapture-screenshot-arranger)
+
+## Optional
+
+- [Privacy Policy](https://splitcapture.big-aro.com/privacy.html)
+- [Legal notice / refund policy (特定商取引法に基づく表記)](https://splitcapture.big-aro.com/tokushoho.html)

@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Figmaでスクショがぼやける原因（4096px制限）と、フルページを鮮明なまま貼る方法 | SplitCapture</title>
+  <meta name="description" content="Figmaは4096pxを超える画像を縮小するため、フルページのスクリーンショットはぼやけます。Chrome拡張機能SplitCaptureで4096px以下のタイルに分割し、無料のFigmaプラグインで1枚に再構築する方法を解説します。" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://splitcapture.big-aro.com/ja/figma-screenshot-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://splitcapture.big-aro.com/figma-screenshot-guide.html" />
+  <link rel="alternate" hreflang="ja" href="https://splitcapture.big-aro.com/ja/figma-screenshot-guide.html" />
+  <link rel="alternate" hreflang="x-default" href="https://splitcapture.big-aro.com/figma-screenshot-guide.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="SplitCapture" />
+  <meta property="og:title" content="Figmaでスクショがぼやける原因と、鮮明なまま貼る方法" />
+  <meta property="og:description" content="Figmaは4096pxを超える画像を縮小します。フルページのスクショをFigma向けのタイルに分割し、無料プラグインで1枚に再構築しましょう。" />
+  <meta property="og:url" content="https://splitcapture.big-aro.com/ja/figma-screenshot-guide.html" />
+  <meta property="og:image" content="https://splitcapture.big-aro.com/images/02-before-after-ja.jpg" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="800" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    :root { color-scheme: light dark; --blue:#2f6bff; --line:#e2e8f0; --soft:#f8fafc; --muted:#667; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", Arial, sans-serif;
+      line-height: 1.8; max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem;
+      color: #1a1a1a; background: #fff; overflow-wrap: break-word; line-break: strict;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --line:#2a2a30; --soft:#1b1b1f; --muted:#9a9aa6; }
+      body { color: #e6e6e6; background: #121212; }
+      a { color: #6ab0ff; }
+    }
+    a { color: var(--blue); }
+    nav.top { display:flex; justify-content:space-between; gap:1rem; font-size:.92rem; margin-bottom:1.5rem; }
+    h1 { font-size: 1.7rem; line-height: 1.4; margin: 0 0 1rem; }
+    h2 { font-size: 1.3rem; margin-top: 2.6rem; border-top: 1px solid #8884; padding-top: 1.4rem; }
+    h3 { font-size: 1.05rem; margin: 1.6rem 0 .3rem; }
+    ul, ol { padding-left: 1.3rem; }
+    li { margin: .35rem 0; }
+    .summary { border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:10px; padding:1rem 1.2rem; background:var(--soft); }
+    .summary p { margin: 0; }
+    figure { margin: 1.4rem 0; }
+    figure img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); display: block; }
+    figcaption { color: var(--muted); font-size: .88rem; margin-top: .4rem; }
+    .table-wrap { overflow-x: auto; margin: 1rem 0; }
+    table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+    th, td { text-align: left; vertical-align: top; padding: .6rem .55rem; border-bottom: 1px solid #8884; }
+    thead th { font-weight: 650; }
+    tbody th { font-weight: 600; }
+    table.plan td { white-space: nowrap; }
+    .links { display:flex; flex-wrap:wrap; gap:.7rem; margin:1.2rem 0 .5rem; }
+    .btn { display:inline-block; padding:.6rem 1.1rem; border-radius:10px; text-decoration:none; font-weight:650; background:var(--blue); color:#fff !important; }
+    .btn.secondary { background:transparent; color:var(--blue) !important; border:1px solid var(--blue); }
+    .muted { color: var(--muted); font-size: .92rem; }
+    footer { margin-top:3rem; padding-top:1.4rem; border-top:1px solid #8884; color:#888; font-size:.9rem; }
+    @media (max-width: 560px) {
+      h1 { font-size: 1.4rem; }
+      table { font-size: .9rem; }
+      .btn { width: 100%; text-align: center; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "inLanguage": "ja",
+    "name": "フルページのスクリーンショットをぼかさずにFigmaに貼る方法",
+    "description": "Figmaは4096pxを超える画像を縮小します。Chrome拡張機能SplitCaptureでページを4096px以下のタイルに分割し、無料のFigmaプラグイン「SplitCapture: Screenshot Arranger」で1枚に再構築します。",
+    "image": "https://splitcapture.big-aro.com/images/03-steps-ja.jpg",
+    "totalTime": "PT1M",
+    "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "0" },
+    "tool": [
+      { "@type": "HowToTool", "name": "SplitCapture（Chrome拡張機能）" },
+      { "@type": "HowToTool", "name": "SplitCapture: Screenshot Arranger（Figmaプラグイン）" }
+    ],
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "「画像を分割」をオンにしてページをキャプチャする",
+        "text": "Chromeでページを開き、SplitCaptureのアイコンをクリックして「画像を分割」をオンのまま「ページをキャプチャ」を押します。遅延読み込みのコンテンツも含めてページ全体をスクロールし、4096px以下（初期値4000px）のタイルに分けてZIPでダウンロードします。",
+        "image": "https://splitcapture.big-aro.com/images/02-before-after-ja.jpg",
+        "url": "https://splitcapture.big-aro.com/ja/figma-screenshot-guide.html#step-1"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "無料のFigmaプラグインを開き、タイルをドロップする",
+        "text": "Figmaで無料プラグイン「SplitCapture: Screenshot Arranger」を起動し、ZIPファイル（またはPNG/JPEGのタイル）をドラッグ＆ドロップします。",
+        "image": "https://splitcapture.big-aro.com/images/03-steps-ja.jpg",
+        "url": "https://splitcapture.big-aro.com/ja/figma-screenshot-guide.html#step-2"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "プラグインが1枚の画像に再構築する",
+        "text": "プラグインがファイル名順にタイルを並べ替え、隙間なく順番通りに積み直して、1枚の長いページとしてグループ化します。各タイルは4096px以下なのでFigmaで縮小されず、鮮明なままです。",
+        "image": "https://splitcapture.big-aro.com/images/04-figma-reassemble-ja.jpg",
+        "url": "https://splitcapture.big-aro.com/ja/figma-screenshot-guide.html#step-3"
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "inLanguage": "ja",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Figmaに貼ったスクリーンショットがぼやけるのはなぜですか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "Figmaが扱える画像は1辺4096pxまでだからです。高さ10,000pxのフルページスクショのように大きな画像を取り込むと、Figmaは4096pxに収まるよう縮小するため、文字やUIの細部がぼやけます。すべての画像を4096px以下にすれば縮小は起きません。" }
+      },
+      {
+        "@type": "Question",
+        "name": "Figmaで扱える画像の最大サイズは？",
+        "acceptedAnswer": { "@type": "Answer", "text": "4096 × 4096ピクセルです。縦横どちらかがこれを超える画像は、取り込み時に縮小されます。" }
+      },
+      {
+        "@type": "Question",
+        "name": "Figmaプラグインは必須ですか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "必須ではありませんが、手作業が不要になります。タイルをそのままFigmaにドロップすると散らばって配置され、手で位置を合わせる必要があります。無料プラグイン「SplitCapture: Screenshot Arranger」なら、順番通り・隙間なく1枚のページに一度で再構築できます。" }
+      },
+      {
+        "@type": "Question",
+        "name": "SplitCaptureは無料ですか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "はい。無料版では、フルページキャプチャとコンポーネントキャプチャが無制限、分割キャプチャが1日3回まで使えます。SplitCapture Proは5米ドルの買い切り（サブスクリプションなし）で、分割キャプチャが無制限になり、分割の高さと重なりを自由に設定できます。購入後14日以内なら全額返金します。Figmaプラグインは無料です。" }
+      },
+      {
+        "@type": "Question",
+        "name": "スクリーンショットはどこかにアップロードされますか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "されません。Chrome拡張機能はキャプチャと分割をすべてブラウザ内で行い、Figmaプラグインはネットワークにアクセスしません。スクリーンショットがお使いのパソコンとFigmaの外に出ることはありません。" }
+      },
+      {
+        "@type": "Question",
+        "name": "ページの幅が4096pxを超える場合はどうなりますか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "「画像を分割」がオンの場合、すべてのタイルが4096px以内に収まりFigmaに配置できるよう、キャプチャ全体を縦横比を保って縮小します。これは大型モニターを2倍の画素密度で使っている場合など、ごく横長のキャプチャのときだけです。それ以外はすべて原寸のまま保存されます。" }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "SplitCapture — Figma向けフルページスクショ",
+    "description": "Webページ全体をキャプチャし、Figmaの4096px制限に収まるタイルに分割するChrome拡張機能。Figmaに貼ってもぼやけません。",
+    "inLanguage": "ja",
+    "applicationCategory": "BrowserApplication",
+    "operatingSystem": "Chrome",
+    "url": "https://chromewebstore.google.com/detail/jboihccnamhoaiibfokihgpkjmbkndbo",
+    "offers": [
+      { "@type": "Offer", "name": "無料版", "price": "0", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "SplitCapture Pro（買い切り）", "price": "5", "priceCurrency": "USD" }
+    ],
+    "publisher": { "@type": "Organization", "name": "合同会社bigaro", "url": "https://splitcapture.big-aro.com/" }
+  }
+  </script>
+</head>
+<body>
+  <nav class="top">
+    <a href="../index.html">← SplitCapture</a>
+    <a href="../figma-screenshot-guide.html" hreflang="en" lang="en">English</a>
+  </nav>
+
+  <main>
+  <article>
+  <h1>Figmaでスクショがぼやける原因と、フルページのスクリーンショットを鮮明なまま貼る方法</h1>
+
+  <div class="summary">
+    <p><strong>結論:</strong> Figmaは1辺が<strong>4096px</strong>を超える画像を縮小するため、縦に長いフルページのスクリーンショットは取り込んだ時点でぼやけます。Chrome拡張機能<strong>SplitCapture</strong>でページを4096px以下のタイルに分割し、無料のFigmaプラグインで継ぎ目のない1枚に再構築すれば、鮮明なまま扱えます。</p>
+  </div>
+
+  <h2 id="why">Figmaでスクショがぼやける原因</h2>
+  <p>ぼやける原因は、Figmaで扱える画像の最大サイズが<strong>4096 × 4096px</strong>で、それを超える画像は取り込み時に縮小されることです。一般的なランディングページを2倍の画素密度でキャプチャすると、高さは10,000〜20,000pxに達します。高さ12,000pxの画像を4096pxに収めるため、Figmaは約3分の1に縮小します。その結果、小さな文字は読めなくなり、細い線は消えます。</p>
+  <p>ブラウザや画像ビューアでは問題なく見えるため、Figma上で拡大するまで劣化に気づきにくいのが厄介な点です。</p>
+  <figure>
+    <img src="../images/02-before-after-ja.jpg" width="1280" height="800" loading="lazy"
+      alt="比較図：縦に長い1枚のスクリーンショットはFigmaで縮小されてぼやけるが、4096px以下のタイルに分割した同じページは鮮明なまま" />
+    <figcaption>巨大な1枚は縮小され、4096px以下のタイルは原寸で取り込まれます。</figcaption>
+  </figure>
+
+  <h2 id="how-to">フルページのスクショをぼかさずにFigmaに貼る方法（3ステップ）</h2>
+  <p>ページをタイルでキャプチャし、無料プラグインにドロップすれば、プラグインが鮮明な1枚のページに再構築します。所要時間は1分ほどで、費用はかかりません。</p>
+  <figure>
+    <img src="../images/03-steps-ja.jpg" width="1280" height="800" loading="lazy"
+      alt="3ステップの図：ページ全体をキャプチャし、4096px以下のFigma用タイルに分割し、無料プラグインでFigma上に再構築する" />
+  </figure>
+
+  <h3 id="step-1">1. 「画像を分割」をオンにしてページをキャプチャする</h3>
+  <p>Chromeでページを開き、SplitCaptureのアイコンをクリックして、<strong>「画像を分割」</strong>をオンのまま<strong>「ページをキャプチャ」</strong>を押します。遅延読み込みのコンテンツも含めてページ全体をスクロールし、4096px以下（初期値4000px）のタイルに分けて、まとめてZIPでダウンロードします。</p>
+
+  <h3 id="step-2">2. 無料のFigmaプラグインを開き、タイルをドロップする</h3>
+  <p>Figmaで<strong>「SplitCapture: Screenshot Arranger」</strong>を起動し、ZIPファイル（またはPNG/JPEGのタイル）をドラッグ＆ドロップします。ZIPを展開する必要はありません。</p>
+
+  <h3 id="step-3">3. プラグインが1枚の画像に再構築する</h3>
+  <p>プラグインがファイル名順にタイルを並べ替え、隙間なく順番通りに積み直して、1枚の長いページとしてグループ化します。各タイルは4096px以下なのでFigmaで縮小されず、再構築したページは元と同じ鮮明さです。</p>
+  <figure>
+    <img src="../images/04-figma-reassemble-ja.jpg" width="1280" height="800" loading="lazy"
+      alt="Figmaのキャンバスで、散らばったスクリーンショットのタイルをプラグインが1枚の長いページに再構築している様子" />
+    <figcaption>散らばったタイルが、1枚のつながったページに戻ります。</figcaption>
+  </figure>
+
+  <h2 id="how-it-works">分割の仕組み</h2>
+  <p>SplitCaptureは、フルページのキャプチャを1枚あたり<strong>4096px以下</strong>の横長のタイルに切り分けます。そのためFigmaが縮小する理由がありません。</p>
+  <ul>
+    <li><strong>タイルの高さ:</strong> 初期値は4000px。Pro版では4096px以下の任意の高さに設定できます。</li>
+    <li><strong>継ぎ目なし:</strong> タイルはピクセル単位で正確に切り分け、初期設定では重なりもありません。積み直すと、行の重複や欠けのない元のページになります。</li>
+    <li><strong>原寸のまま:</strong> タイルは元のピクセルを保ちます。例外は幅が4096pxを超えるキャプチャ（大型モニターを2倍の画素密度で使う場合など）で、Figmaに配置できるよう縦横比を保って縮小します。</li>
+    <li><strong>連番のファイル名:</strong> タイルには番号が付くため、プラグインが正しい順番を判断できます。</li>
+    <li><strong>すべてローカル処理:</strong> キャプチャと分割はブラウザ内で完結し、何もアップロードしません。</li>
+  </ul>
+
+  <h2 id="compare">他の方法との比較</h2>
+  <p>縦長のスクショをFigmaに直接貼るのが最も手軽ですが、この方法ではぼやけます。手作業で切り分ければ鮮明さは保てますが、1ページに数分かかります。SplitCaptureとプラグインなら、数クリックで鮮明なまま取り込めます。</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th scope="col">方法</th><th scope="col">Figmaで鮮明か</th><th scope="col">手間</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">フルページのスクショをそのまま貼る</th><td>いいえ（高さ4096px超は縮小される）</td><td>少ない</td></tr>
+        <tr><th scope="row">一般的なフルページ拡張機能＋画像編集ソフトで分割</th><td>はい（すべて4096px以下に切れば）</td><td>多い（切り出し・書き出し・位置合わせを手作業）</td></tr>
+        <tr><th scope="row">タイルをプラグインなしでFigmaにドロップ</th><td>はい</td><td>中程度（散らばったタイルを手で並べ直す）</td></tr>
+        <tr><th scope="row">SplitCapture＋無料Figmaプラグイン</th><td>はい（全タイルが4096px以下）</td><td>少ない（キャプチャしてZIPをドロップするだけ）</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="pricing">無料版とPro版</h2>
+  <p>SplitCaptureは無料で使え、<strong>分割キャプチャは1日3回</strong>までです。Pro版は<strong>5米ドルの買い切り</strong>（サブスクリプションなし）で、購入後14日以内なら全額返金します。</p>
+  <div class="table-wrap">
+    <table class="plan">
+      <thead>
+        <tr><th scope="col">機能</th><th scope="col">無料版</th><th scope="col">Pro版（5米ドル・買い切り）</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">フルページキャプチャ（分割なし）</th><td>無制限</td><td>無制限</td></tr>
+        <tr><th scope="row">Figma向け分割キャプチャ</th><td>1日3回</td><td>無制限</td></tr>
+        <tr><th scope="row">コンポーネント（要素）キャプチャ</th><td>無制限</td><td>無制限</td></tr>
+        <tr><th scope="row">分割の高さ・重なりの設定</th><td>—</td><td>✓</td></tr>
+        <tr><th scope="row">Figmaプラグイン</th><td>無料</td><td>無料</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">1日の回数はお使いの端末の日付で0時にリセットされ、分割キャプチャが成功したときだけ消費されます。</p>
+
+  <h2 id="faq">よくある質問</h2>
+
+  <h3>Figmaに貼ったスクリーンショットがぼやけるのはなぜですか？</h3>
+  <p>Figmaが扱える画像は1辺4096pxまでだからです。高さ10,000pxのフルページスクショのように大きな画像を取り込むと、Figmaは4096pxに収まるよう縮小するため、文字やUIの細部がぼやけます。すべての画像を4096px以下にすれば縮小は起きません。</p>
+
+  <h3>Figmaで扱える画像の最大サイズは？</h3>
+  <p>4096 × 4096ピクセルです。縦横どちらかがこれを超える画像は、取り込み時に縮小されます。</p>
+
+  <h3>Figmaプラグインは必須ですか？</h3>
+  <p>必須ではありませんが、手作業が不要になります。タイルをそのままFigmaにドロップすると散らばって配置され、手で位置を合わせる必要があります。無料プラグイン「SplitCapture: Screenshot Arranger」なら、順番通り・隙間なく1枚のページに一度で再構築できます。</p>
+
+  <h3>SplitCaptureは無料ですか？</h3>
+  <p>はい。無料版では、フルページキャプチャとコンポーネントキャプチャが無制限、分割キャプチャが1日3回まで使えます。SplitCapture Proは5米ドルの買い切り（サブスクリプションなし）で、分割キャプチャが無制限になり、分割の高さと重なりを自由に設定できます。購入後14日以内なら全額返金します。Figmaプラグインは無料です。</p>
+
+  <h3>スクリーンショットはどこかにアップロードされますか？</h3>
+  <p>されません。Chrome拡張機能はキャプチャと分割をすべてブラウザ内で行い、Figmaプラグインはネットワークにアクセスしません。スクリーンショットがお使いのパソコンとFigmaの外に出ることはありません。</p>
+
+  <h3>ページの幅が4096pxを超える場合はどうなりますか？</h3>
+  <p>「画像を分割」がオンの場合、すべてのタイルが4096px以内に収まりFigmaに配置できるよう、キャプチャ全体を縦横比を保って縮小します。これは大型モニターを2倍の画素密度で使っている場合など、ごく横長のキャプチャのときだけです。それ以外はすべて原寸のまま保存されます。</p>
+
+  <h2 id="get-started">使ってみる</h2>
+  <p>キャプチャと分割はChrome拡張機能で、1枚への再構築は無料のFigmaプラグインで行います。</p>
+  <div class="links">
+    <a class="btn" href="https://chromewebstore.google.com/detail/jboihccnamhoaiibfokihgpkjmbkndbo">Chromeに追加（無料）</a>
+    <a class="btn secondary" href="https://www.figma.com/community/plugin/1650761889205206657/splitcapture-screenshot-arranger">無料のFigmaプラグインを入手</a>
+  </div>
+  <p class="muted">お問い合わせ: <a href="mailto:info@big-aro.com">info@big-aro.com</a></p>
+  </article>
+  </main>
+
+  <footer>
+    <a href="../index.html">SplitCapture</a> · <a href="../privacy.html">Privacy Policy</a> · <a href="../tokushoho.html">特定商取引法に基づく表記</a><br>
+    Figmaとの提携・推奨・スポンサー関係はありません。FigmaはFigma, Inc.の商標です。</footer>
+</body>
+</html>

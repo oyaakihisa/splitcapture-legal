@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://splitcapture.big-aro.com/</loc>
+    <lastmod>2026-10-15</lastmod>
+  </url>
+  <url>
+    <loc>https://splitcapture.big-aro.com/figma-screenshot-guide.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://splitcapture.big-aro.com/figma-screenshot-guide.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://splitcapture.big-aro.com/ja/figma-screenshot-guide.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://splitcapture.big-aro.com/figma-screenshot-guide.html" />
+  </url>
+  <url>
+    <loc>https://splitcapture.big-aro.com/ja/figma-screenshot-guide.html</loc>
+    <lastmod>2026-10-15</lastmod>
+    <xhtml:link rel="alternate" hreflang="en" href="https://splitcapture.big-aro.com/figma-screenshot-guide.html" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://splitcapture.big-aro.com/ja/figma-screenshot-guide.html" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://splitcapture.big-aro.com/figma-screenshot-guide.html" />
+  </url>
+  <url>
+    <loc>https://splitcapture.big-aro.com/privacy.html</loc>
+    <lastmod>2026-06-23</lastmod>
+  </url>
+  <url>
+    <loc>https://splitcapture.big-aro.com/tokushoho.html</loc>
+    <lastmod>2026-10-12</lastmod>
+  </url>
+</urlset>

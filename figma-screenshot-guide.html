@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Figma Screenshots Get Blurry (4096px Limit) — and How to Keep Them Sharp | SplitCapture</title>
+  <meta name="description" content="Figma downscales any image larger than 4096px, so full-page screenshots turn blurry. Split the page into tiles under 4096px with the SplitCapture Chrome extension, then rebuild it as one image with the free Figma plugin." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://splitcapture.big-aro.com/figma-screenshot-guide.html" />
+  <link rel="alternate" hreflang="en" href="https://splitcapture.big-aro.com/figma-screenshot-guide.html" />
+  <link rel="alternate" hreflang="ja" href="https://splitcapture.big-aro.com/ja/figma-screenshot-guide.html" />
+  <link rel="alternate" hreflang="x-default" href="https://splitcapture.big-aro.com/figma-screenshot-guide.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="SplitCapture" />
+  <meta property="og:title" content="Why Figma screenshots get blurry — and how to keep them sharp" />
+  <meta property="og:description" content="Figma downscales images past 4096px. Split full-page screenshots into Figma-ready tiles, then rebuild them as one image with the free plugin." />
+  <meta property="og:url" content="https://splitcapture.big-aro.com/figma-screenshot-guide.html" />
+  <meta property="og:image" content="https://splitcapture.big-aro.com/images/02-before-after.jpg" />
+  <meta property="og:image:width" content="1280" />
+  <meta property="og:image:height" content="800" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:locale:alternate" content="ja_JP" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <style>
+    :root { color-scheme: light dark; --blue:#2f6bff; --line:#e2e8f0; --soft:#f8fafc; --muted:#667; }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Noto Sans JP", Arial, sans-serif;
+      line-height: 1.7; max-width: 760px; margin: 0 auto; padding: 2rem 1.25rem 4rem;
+      color: #1a1a1a; background: #fff; overflow-wrap: break-word;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --line:#2a2a30; --soft:#1b1b1f; --muted:#9a9aa6; }
+      body { color: #e6e6e6; background: #121212; }
+      a { color: #6ab0ff; }
+    }
+    a { color: var(--blue); }
+    nav.top { display:flex; justify-content:space-between; gap:1rem; font-size:.92rem; margin-bottom:1.5rem; }
+    h1 { font-size: 1.8rem; line-height: 1.3; margin: 0 0 1rem; }
+    h2 { font-size: 1.3rem; margin-top: 2.6rem; border-top: 1px solid #8884; padding-top: 1.4rem; }
+    h3 { font-size: 1.05rem; margin: 1.6rem 0 .3rem; }
+    ul, ol { padding-left: 1.3rem; }
+    li { margin: .35rem 0; }
+    .summary { border:1px solid var(--line); border-left:4px solid var(--blue); border-radius:10px; padding:1rem 1.2rem; background:var(--soft); }
+    .summary p { margin: 0; }
+    figure { margin: 1.4rem 0; }
+    figure img { width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); display: block; }
+    figcaption { color: var(--muted); font-size: .88rem; margin-top: .4rem; }
+    .table-wrap { overflow-x: auto; margin: 1rem 0; }
+    table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+    th, td { text-align: left; vertical-align: top; padding: .6rem .55rem; border-bottom: 1px solid #8884; }
+    thead th { font-weight: 650; }
+    tbody th { font-weight: 600; }
+    table.plan td { white-space: nowrap; }
+    .links { display:flex; flex-wrap:wrap; gap:.7rem; margin:1.2rem 0 .5rem; }
+    .btn { display:inline-block; padding:.6rem 1.1rem; border-radius:10px; text-decoration:none; font-weight:650; background:var(--blue); color:#fff !important; }
+    .btn.secondary { background:transparent; color:var(--blue) !important; border:1px solid var(--blue); }
+    .muted { color: var(--muted); font-size: .92rem; }
+    footer { margin-top:3rem; padding-top:1.4rem; border-top:1px solid #8884; color:#888; font-size:.9rem; }
+    @media (max-width: 560px) {
+      h1 { font-size: 1.5rem; }
+      table { font-size: .9rem; }
+      .btn { width: 100%; text-align: center; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to put a full-page screenshot into Figma without blur",
+    "description": "Figma downscales images larger than 4096px. Split the page into tiles under 4096px with the SplitCapture Chrome extension, then rebuild them into one image with the free SplitCapture Figma plugin.",
+    "image": "https://splitcapture.big-aro.com/images/03-steps.jpg",
+    "totalTime": "PT1M",
+    "estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": "0" },
+    "tool": [
+      { "@type": "HowToTool", "name": "SplitCapture Chrome extension" },
+      { "@type": "HowToTool", "name": "SplitCapture: Screenshot Arranger Figma plugin" }
+    ],
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Capture the page with Split image on",
+        "text": "Open the page in Chrome, click the SplitCapture icon, keep Split image turned on and click Capture Page. SplitCapture scrolls the whole page, including lazy-loaded content, and saves it as tiles of 4096px or less (4000px by default), downloaded as a ZIP.",
+        "image": "https://splitcapture.big-aro.com/images/02-before-after.jpg",
+        "url": "https://splitcapture.big-aro.com/figma-screenshot-guide.html#step-1"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Open the free Figma plugin and drop the tiles",
+        "text": "In Figma, run the free SplitCapture: Screenshot Arranger plugin and drag the ZIP or the PNG/JPEG tiles into it.",
+        "image": "https://splitcapture.big-aro.com/images/03-steps.jpg",
+        "url": "https://splitcapture.big-aro.com/figma-screenshot-guide.html#step-2"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Rebuild the page as one image",
+        "text": "The plugin sorts the tiles by filename and stacks them in order with no gaps, grouped as one full-length page. Every tile stays at 4096px or less, so Figma does not downscale it and the page stays sharp.",
+        "image": "https://splitcapture.big-aro.com/images/04-figma-reassemble.jpg",
+        "url": "https://splitcapture.big-aro.com/figma-screenshot-guide.html#step-3"
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why do my screenshots look blurry in Figma?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Figma supports images up to 4096px on each side. When you import a larger image, such as a full-page screenshot that is 10,000px tall, Figma scales it down to fit 4096px, so text and UI details turn soft. Keeping every image at 4096px or less avoids the downscaling." }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the maximum image size in Figma?",
+        "acceptedAnswer": { "@type": "Answer", "text": "4096 × 4096 pixels. Images larger than that on either side are downscaled when they are imported." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need the Figma plugin?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No, but it saves the manual work. You can drop the tiles into Figma yourself, but they land scattered and you have to line them up by hand. The free SplitCapture: Screenshot Arranger plugin rebuilds them into one page, in order and with no gaps, in one step." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is SplitCapture free?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. The free version includes unlimited full-page captures, unlimited component captures and 3 split captures per day. SplitCapture Pro is a one-time payment of USD 5 (no subscription) that unlocks unlimited split captures and a custom split height and overlap. Pro comes with a 14-day full refund. The Figma plugin is free." }
+      },
+      {
+        "@type": "Question",
+        "name": "Are my screenshots uploaded anywhere?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. The Chrome extension captures and splits pages entirely in your browser, and the Figma plugin has no network access. Your screenshots never leave your computer and Figma." }
+      },
+      {
+        "@type": "Question",
+        "name": "What happens if the page is wider than 4096px?",
+        "acceptedAnswer": { "@type": "Answer", "text": "With Split image on, SplitCapture scales the whole capture down proportionally so that every tile fits within 4096px and can still be placed in Figma. This only happens on very wide captures, such as a large monitor at 2x pixel density. In all other cases the tiles are saved at full resolution." }
+      }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "SplitCapture — Full Page Screenshots for Figma",
+    "description": "Chrome extension that captures full web pages and splits them into Figma-ready tiles under the 4096px limit, so they stay sharp in Figma.",
+    "applicationCategory": "BrowserApplication",
+    "operatingSystem": "Chrome",
+    "url": "https://chromewebstore.google.com/detail/jboihccnamhoaiibfokihgpkjmbkndbo",
+    "offers": [
+      { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "SplitCapture Pro (one-time payment)", "price": "5", "priceCurrency": "USD" }
+    ],
+    "publisher": { "@type": "Organization", "name": "bigaro LLC", "url": "https://splitcapture.big-aro.com/" }
+  }
+  </script>
+</head>
+<body>
+  <nav class="top">
+    <a href="./index.html">← SplitCapture</a>
+    <a href="./ja/figma-screenshot-guide.html" hreflang="ja" lang="ja">日本語</a>
+  </nav>
+
+  <main>
+  <article>
+  <h1>Why Figma screenshots get blurry — and how to keep full-page screenshots sharp</h1>
+
+  <div class="summary">
+    <p><strong>In short:</strong> Figma downscales any image larger than <strong>4096px</strong> on a side,
+    so a tall full-page screenshot turns blurry the moment you import it. The fix is to split the page into tiles
+    of 4096px or less with the <strong>SplitCapture</strong> Chrome extension, then rebuild them into one
+    seamless image with the free <strong>SplitCapture</strong> Figma plugin.</p>
+  </div>
+
+  <h2 id="why">Why screenshots get blurry in Figma</h2>
+  <p>Screenshots get blurry because Figma's maximum image size is <strong>4096 × 4096px</strong>, and anything larger
+  is scaled down on import. A typical landing page captured at 2x pixel density is easily 10,000–20,000px tall. To fit
+  a 12,000px-tall capture into 4096px, Figma shrinks it to about one third of its size — small text becomes unreadable
+  and thin lines disappear.</p>
+  <p>The image looks fine in your browser or image viewer; the loss happens only inside Figma, which is why it is easy
+  to miss until you zoom in.</p>
+  <figure>
+    <img src="./images/02-before-after.jpg" width="1280" height="800" loading="lazy"
+      alt="Comparison: a single tall screenshot is downscaled and blurred by Figma, while the same page split into tiles of 4096px or less stays sharp" />
+    <figcaption>One huge image is downscaled; tiles under 4096px are imported at full resolution.</figcaption>
+  </figure>
+
+  <h2 id="how-to">How to put a full-page screenshot into Figma without blur (3 steps)</h2>
+  <p>Capture the page as tiles, drop them into the free plugin, and the plugin rebuilds one sharp page. It takes about
+  a minute and costs nothing.</p>
+  <figure>
+    <img src="./images/03-steps.jpg" width="1280" height="800" loading="lazy"
+      alt="Three steps: capture the full page, split it into Figma tiles under 4096px, and reassemble them in Figma with the free plugin" />
+  </figure>
+
+  <h3 id="step-1">1. Capture the page with “Split image” on</h3>
+  <p>Open the page in Chrome, click the SplitCapture icon, keep <strong>Split image</strong> turned on and click
+  <strong>Capture Page</strong>. SplitCapture scrolls the whole page — including lazy-loaded content — and saves it as
+  tiles of 4096px or less (4000px by default), downloaded together as a ZIP.</p>
+
+  <h3 id="step-2">2. Open the free Figma plugin and drop the tiles</h3>
+  <p>In Figma, run <strong>SplitCapture: Screenshot Arranger</strong> and drag the ZIP (or the PNG/JPEG tiles) into
+  it. You don't need to unzip anything.</p>
+
+  <h3 id="step-3">3. The plugin rebuilds the page as one image</h3>
+  <p>The plugin sorts the tiles by filename and stacks them in order with no gaps, grouped as one full-length page.
+  Because each tile is 4096px or less, Figma keeps it at full resolution — the rebuilt page is as sharp as the original.</p>
+  <figure>
+    <img src="./images/04-figma-reassemble.jpg" width="1280" height="800" loading="lazy"
+      alt="Figma canvas where scattered screenshot tiles are reassembled by the plugin into one continuous full-length page" />
+    <figcaption>Scattered tiles go in; one continuous page comes out.</figcaption>
+  </figure>
+
+  <h2 id="how-it-works">How the splitting works</h2>
+  <p>SplitCapture cuts the full-page capture into horizontal tiles that are each <strong>4096px or less</strong>, so
+  Figma never has a reason to downscale them.</p>
+  <ul>
+    <li><strong>Tile height:</strong> 4000px by default. Pro users can set any height up to 4096px.</li>
+    <li><strong>No seams:</strong> tiles are cut at exact pixel boundaries with no overlap by default, so stacking them
+      reproduces the original page without duplicated or missing rows.</li>
+    <li><strong>Full resolution:</strong> tiles keep the original pixels. The only exception is a capture wider than
+      4096px (for example a large monitor at 2x), which is scaled down proportionally so it can still be placed in Figma.</li>
+    <li><strong>Ordered filenames:</strong> tiles are numbered, so the plugin knows the correct order.</li>
+    <li><strong>100% local:</strong> capturing and splitting happen in your browser. Nothing is uploaded.</li>
+  </ul>
+
+  <h2 id="compare">SplitCapture vs. other ways to get long screenshots into Figma</h2>
+  <p>Pasting a tall screenshot straight into Figma is the fastest way, but it is the one that blurs. Slicing it by hand
+  keeps it sharp but takes several minutes per page. SplitCapture with the plugin keeps it sharp in two clicks.</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th scope="col">Method</th><th scope="col">Sharp in Figma?</th><th scope="col">Effort</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Paste a full-page screenshot directly</th><td>No — downscaled when taller than 4096px</td><td>Low</td></tr>
+        <tr><th scope="row">Generic full-page extension + slicing in an image editor</th><td>Yes, if every slice is 4096px or less</td><td>High — crop, export and align by hand</td></tr>
+        <tr><th scope="row">Drop the tiles into Figma without the plugin</th><td>Yes</td><td>Medium — tiles land scattered and need lining up</td></tr>
+        <tr><th scope="row">SplitCapture + free Figma plugin</th><td>Yes — every tile is 4096px or less</td><td>Low — capture, drop the ZIP, done</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="pricing">Free version and Pro</h2>
+  <p>SplitCapture is free to use, with <strong>3 split captures per day</strong>. Pro is a
+  <strong>one-time payment of USD 5</strong> — no subscription — with a 14-day full refund.</p>
+  <div class="table-wrap">
+    <table class="plan">
+      <thead>
+        <tr><th scope="col">Feature</th><th scope="col">Free</th><th scope="col">Pro (USD 5, one-time)</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Full-page capture (no split)</th><td>Unlimited</td><td>Unlimited</td></tr>
+        <tr><th scope="row">Split capture for Figma</th><td>3 per day</td><td>Unlimited</td></tr>
+        <tr><th scope="row">Component (element) capture</th><td>Unlimited</td><td>Unlimited</td></tr>
+        <tr><th scope="row">Custom split height and overlap</th><td>—</td><td>✓</td></tr>
+        <tr><th scope="row">Figma plugin</th><td>Free</td><td>Free</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">The daily count resets at midnight in your local time and is used only when a split capture succeeds.</p>
+
+  <h2 id="faq">FAQ</h2>
+
+  <h3>Why do my screenshots look blurry in Figma?</h3>
+  <p>Figma supports images up to 4096px on each side. When you import a larger image, such as a full-page screenshot
+  that is 10,000px tall, Figma scales it down to fit 4096px, so text and UI details turn soft. Keeping every image at
+  4096px or less avoids the downscaling.</p>
+
+  <h3>What is the maximum image size in Figma?</h3>
+  <p>4096 × 4096 pixels. Images larger than that on either side are downscaled when they are imported.</p>
+
+  <h3>Do I need the Figma plugin?</h3>
+  <p>No, but it saves the manual work. You can drop the tiles into Figma yourself, but they land scattered and you
+  have to line them up by hand. The free SplitCapture: Screenshot Arranger plugin rebuilds them into one page, in
+  order and with no gaps, in one step.</p>
+
+  <h3>Is SplitCapture free?</h3>
+  <p>Yes. The free version includes unlimited full-page captures, unlimited component captures and 3 split captures
+  per day. SplitCapture Pro is a one-time payment of USD 5 (no subscription) that unlocks unlimited split captures and
+  a custom split height and overlap. Pro comes with a 14-day full refund. The Figma plugin is free.</p>
+
+  <h3>Are my screenshots uploaded anywhere?</h3>
+  <p>No. The Chrome extension captures and splits pages entirely in your browser, and the Figma plugin has no network
+  access. Your screenshots never leave your computer and Figma.</p>
+
+  <h3>What happens if the page is wider than 4096px?</h3>
+  <p>With Split image on, SplitCapture scales the whole capture down proportionally so that every tile fits within
+  4096px and can still be placed in Figma. This only happens on very wide captures, such as a large monitor at 2x pixel
+  density. In all other cases the tiles are saved at full resolution.</p>
+
+  <h2 id="get-started">Get started</h2>
+  <p>Install the Chrome extension to capture and split, and the free Figma plugin to rebuild the page as one image.</p>
+  <div class="links">
+    <a class="btn" href="https://chromewebstore.google.com/detail/jboihccnamhoaiibfokihgpkjmbkndbo">Add to Chrome — it's free</a>
+    <a class="btn secondary" href="https://www.figma.com/community/plugin/1650761889205206657/splitcapture-screenshot-arranger">Get the free Figma plugin</a>
+  </div>
+  <p class="muted">Questions? Email <a href="mailto:info@big-aro.com">info@big-aro.com</a>.</p>
+  </article>
+  </main>
+
+  <footer>
+    <a href="./index.html">SplitCapture</a> · <a href="./privacy.html">Privacy Policy</a> · <a href="./tokushoho.html">特定商取引法に基づく表記</a><br>
+    Not affiliated with, endorsed by, or sponsored by Figma. Figma is a trademark of Figma, Inc.
+  </footer>
+</body>
+</html>
